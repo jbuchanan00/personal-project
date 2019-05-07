@@ -27,7 +27,9 @@ insert into user_personal_info(
 insert into secret_info(
     ssn,
     birthday,
-    account_number
+    account_number,
+    first_name,
+    last_name
 )values(
     ${ssn},
     ${birthday},

@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs")
 
+
 module.exports = {
     createAccount: async (req, res) => {
         //Need to take in several inputs.  First name, last name,
@@ -9,7 +10,6 @@ module.exports = {
         state, zip, account_number, username} = req.body
         
         const existingUser = await db.get_user_by_email({email})
-        console.log(existingUser)
         if(existingUser[0]){
             console.log(`email existing`)
             return res.status(409).send(`Email already in use`)
@@ -30,17 +30,15 @@ module.exports = {
     login: async (req, res) => {
         const db = req.app.get("db")
         const {username, email, password} = req.body
-
         let user;
-
         if(email){
             user = await db.get_user_by_email({username, email, password})
             user = user[0]
+            
             if(!user){
                 return res.status(409).send(`Missing email/username or password`)
             }
 
-            console.log(password, user.password)
             let isAuth = bcrypt.compareSync(password, user.password)
             
             if(!isAuth){
@@ -53,7 +51,7 @@ module.exports = {
             delete authUser.password
             
             req.session.user = authUser
-            res.status(200).send(req.session.user)
+            return res.status(200).send(req.session.user)
         }
         
         if(!email && username){
@@ -76,7 +74,7 @@ module.exports = {
             delete authUser.password
             
             req.session.user = authUser
-            res.status(200).send(req.session.user)
+            return res.status(200).send(req.session.user)
         }
 
     },

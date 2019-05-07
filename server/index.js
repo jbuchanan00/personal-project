@@ -5,6 +5,7 @@ const session = require("express-session")
 const {SESSION_SECRET, CONNECTION_STRING, SERVER_PORT} = process.env
 const authCtrl = require("./controllers/authController")
 const acctCtrl = require("./controllers/accountController")
+const userCtrl = require("./controllers/userController")
 
 const app = express()
 
@@ -31,3 +32,5 @@ app.get("/info/account", acctCtrl.getAccountBalance)
 app.post("/auth/login", authCtrl.login)
 app.post("/auth/logout", authCtrl.logout)
 app.post("/auth/createaccount", authCtrl.createAccount)
+app.put("/update/balance", acctCtrl.updateBalance)
+app.put("/update/adminstatus", userCtrl.changeAdminStatus)
