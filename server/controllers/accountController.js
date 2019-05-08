@@ -1,16 +1,18 @@
 module.exports = {
     getData: async (req, res) => {
         const db = req.app.get("db")
-        const users = await db.get_user_details({email: req.session.user.email})
+        
+        const users = await db.get_all_data()
         res.status(200).send(users)
     },
     getAccountBalance: async (req, res) => {
         const db = req.app.get("db")
+        console.log(1111111111111111, req.session.user)
         const {first_name, last_name, account_number} = req.session.user
 
         let accountBalance = await db.get_balances({account_number})
         
-        console.log(11111111, accountBalance[0])
+        
 
         accountBalance = accountBalance[0]
         let {savings_balance, checkings_balance, auto_loan_balance, personal_loan_balance, credit_card_balance} = accountBalance

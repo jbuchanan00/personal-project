@@ -23,7 +23,11 @@ module.exports = {
 
         const newUser = response[0]
         
+        delete newUser.ssn
+        delete newUser.birthday
+        delete newUser.password 
         
+        console.log(newUser)
         req.session.user = newUser
         res.status(200).send(req.session.user)
     },
@@ -51,6 +55,7 @@ module.exports = {
             delete authUser.password
             
             req.session.user = authUser
+            console.log(req.session.user)
             return res.status(200).send(req.session.user)
         }
         
