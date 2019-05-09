@@ -11,17 +11,8 @@ module.exports = {
         const {first_name, last_name, account_number} = req.session.user
 
         let accountBalance = await db.get_balances({account_number})
-        
-        
-
         accountBalance = accountBalance[0]
-        let {savings_balance, checkings_balance, auto_loan_balance, personal_loan_balance, credit_card_balance} = accountBalance
-
-
-        const welcomePage = `Welcome ${first_name} ${last_name}.  Your balances are savings: $${savings_balance} checking: $${checkings_balance}
-        auto loan: $${auto_loan_balance} personal loan: $${personal_loan_balance} credit card: $${credit_card_balance}`
-        
-        res.status(200).send(welcomePage)
+        res.status(200).send(accountBalance)
     },
     updateBalance: async (req, res) => {
         const db = req.app.get("db")

@@ -1,6 +1,9 @@
+@import "./_Header.scss";
+
 .App {
   text-align: center;
-  background-color: #4CBB17;
+  background: linear-gradient(rgba(241, 241, 241, 0.5), rgba(255, 255, 255, 0.5)), url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BZBMrpQIiq3lg4cl/green-lines-corporate-background-2_rj-efspyg_thumbnail-full01.png");
+  
   height: 100vh;
 }
 
@@ -30,7 +33,7 @@ header{
   justify-content: space-between;
   align-items: center;
   height: 15vh;
-  background-color: #00A86B;
+  background-color: #3a8841;
   
 }
 .logo{

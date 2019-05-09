@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
 
+
 export default class Header extends Component {
     constructor(props) {
         super(props)
@@ -20,12 +21,16 @@ export default class Header extends Component {
         if (this.state.dropMenuOpen) {
 
             menu =
-                <div>
-                    <Link to="/login">
-                        <p>Login</p>
+                <div className="dropdown-menu">
+                    <Link to="/login" className="menu-link" >
+                        <p onClick={this.toggle}>Login</p>
                     </Link>
-                    <p>Create An Account</p>
-                    <p>Additional Information</p>
+                    <Link className="menu-link">
+                        <p onClick={this.toggle}>Create An Account</p>
+                    </Link>
+                    <Link className="menu-link">
+                        <p onClick={this.toggle}>Additional Information</p>
+                    </Link>
                 </div>
         }
 
@@ -35,7 +40,7 @@ export default class Header extends Component {
 
                 <header>
                     <div className="logo">
-                        <Link to="/">
+                        <Link to="/" className="logo-to-home">
                             <i className="fas fa-landmark"></i>
                         </Link>
                     </div>
