@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 
 import { HashRouter as Router } from "react-router-dom"
-import Header from "./components/Header"
+import Header from "./components/InfoViews/Header"
 import { Provider } from "react-redux"
 import store from "./redux/store"
 

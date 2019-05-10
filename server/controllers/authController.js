@@ -7,8 +7,13 @@ module.exports = {
         //email, password, birthday, ssn, phone number, street, city, state, zip
         const db = req.app.get("db")
         const {first_name, last_name, email, password, birthday, ssn, phone_number, street, city,
-        state, zip, account_number, username} = req.body
+        state, zip, username} = req.body
         
+        const existingAccounts = await db.creating_account_number()
+        
+        const account_number = `10${existingAccounts[0].count}`
+        console.log(111111111111, account_number)
+
         const existingUser = await db.get_user_by_email({email})
         if(existingUser[0]){
             console.log(`email existing`)

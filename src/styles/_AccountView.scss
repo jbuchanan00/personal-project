@@ -1,0 +1,73 @@
+
+
+.welcome-name{
+    // border: 1px solid #000;
+    margin: 20px;
+    // background-color: #f1f1f1;
+    border-radius: 10px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    font-family: $title-font;
+    text-transform: capitalize;
+    box-shadow: 5px 5px, black;
+}
+.account-balance-container{
+    // border: 1px dotted #000;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    height: 10vh;
+    font-family: 'Just Another Hand', cursive;
+    font-size: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 5px 5px, black;
+    margin: 20px 0px;
+}
+.account-view-total{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+}
+.account-balances-view{
+    // border: 1px solid #000;
+    margin: 20px;
+    
+    // background-color: grey;
+    border-radius: 10px;
+
+}
+.inside-container-balance{
+    width: 75vw;
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+span{
+    width: 50vw;
+    text-align: center;
+}
+.history-button{
+    height: 100%;
+    background-color: #0a3500;
+    color: white;
+    border-radius: 0px 10px 10px 0px;
+}
+.type-of-account{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    background: #0a3500;
+    width: 40%;
+    color: white;
+    border-radius: 10px 0px 0px 10px;
+    
+}

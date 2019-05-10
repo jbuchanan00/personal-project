@@ -15,6 +15,7 @@ let initialState = {
 export const UPDATE_USER_INFORMATION = "UPDATE_USER_INFORMATION"
 
 
+
 export function updateUserInfo(obj){
     return{
         type: UPDATE_USER_INFORMATION,

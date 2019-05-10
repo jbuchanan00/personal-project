@@ -1,0 +1,26 @@
+.menu-link{
+    color: #f1f1f1;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+.menu-link:visited{
+    color: #f1f1f1;
+    
+    text-decoration: none;
+}
+.logo-to-home:visited{
+    color: black;
+}
+.dropdown-menu{
+    margin: 7.5vh 0px;
+    width: 100%;
+    position: absolute;
+    background-color: #939393;
+    border-radius: 0px 0px 10px 10px;
+    color: #f1f1f1;
+    
+}
+.header-with-dropdown{
+    display: flex;
+    flex-direction: column;
+}

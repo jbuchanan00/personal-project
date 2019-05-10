@@ -1,0 +1,63 @@
+$color: white;
+$other-font: 'Just Another Hand', cursive;
+$title-font: 'Indie Flower', cursive;
+$main-box-color: #f1f1f1;
+
+.login-container{
+    margin: 5px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.usernameEmail{
+    border-radius: 5px;
+}
+.login-password{
+    border-radius: 5px;
+}
+.login-text-input{
+    display: flex;
+    flex-direction: column;
+    height: 35vh;
+    font-family: $other-font;
+    
+}
+.login-button{
+    width: 130px;
+    background-color: #4d7e29;
+    margin: 10px;
+    height: 40px;
+    border-radius: 20px;
+    color: white;
+    font-size: 1em;
+    font-weight: 800;
+}
+.login-button:active{
+    background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)),#4d7e29;
+    box-shadow: 5px 5px, black;
+}
+.login-text{
+    font-family: $title-font;
+    font-size: 4em;
+    margin: 0;
+}
+.input-description{
+    font-size: 2em;
+    
+    margin: 15px;
+}
+.usernameEmail-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
+}
+.password-container{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
+}
