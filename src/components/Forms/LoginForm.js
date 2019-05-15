@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { withRouter } from "react-router-dom"
 import axios from "axios"
 import { updateUserInfo } from "../../redux/userInfoReducer"
 
@@ -18,17 +17,21 @@ class LoginForm extends Component {
         this.setState({
             [name]: value
         })
-
     }
     loginClick = async () => {
         const { usernameEmail, password } = this.state
         const res = await axios.post("/auth/login", { usernameEmail, password })
+        console.log(res.data)
         this.props.updateUserInfo(res.data)
-        this.props.history.push("/info/account")
         this.setState({
             usernameEmail: "",
             password: ""
         })
+        if(res.data.isadmin){
+            this.props.history.push("/teller/account")
+        }else{
+        this.props.history.push("/info/account")
+        }
     }
 
     render() {
@@ -57,4 +60,4 @@ const mapDispatchToProps = {
     updateUserInfo
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(LoginForm))
+export default connect(null, mapDispatchToProps)(LoginForm)

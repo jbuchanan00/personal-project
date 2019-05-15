@@ -6,6 +6,8 @@ import AccountView from "../components/AccountView/AccountView"
 import CreateAccount from "../components/Forms/CreateAccount"
 import NewAccountInfo from "../components/InfoViews/NewAccountInfo"
 import TellerView from "../components/AccountView/TellerView"
+import UpdateUserInfo from "../components/Forms/UpdateUserInfo"
+import UpdateUserInfoAdmin from "./Forms/UpdateUserInfoAdmin";
 
 
 
@@ -17,5 +19,7 @@ export default(
         <Route path="/createaccount" component={CreateAccount} />
         <Route path="/info/newaccount" component={NewAccountInfo} />
         <Route path="/teller/account" component={TellerView} />
+        <Route path="/info/updateaccount" component={UpdateUserInfo} />
+        <Route path="/teller/updateaccount" component={UpdateUserInfoAdmin} />
     </Switch>
 )

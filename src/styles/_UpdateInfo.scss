@@ -1,0 +1,48 @@
+.name-text{
+    text-transform: capitalize;
+    margin: 5px;
+    background: #f1f1f1;
+    border-radius: 5px;
+    width: 50vw;
+    font-size: 1.5em;
+}
+.info-container{
+    margin: 5px;
+    height: 65vh;
+    background: #f1f1f1;
+    border-radius: 5px;
+    font-weight: 800;
+}
+.info-input{
+    border-radius: 5px;
+}
+.name-container{
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.update-submit{
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 800;
+    font-size: 1em;
+    width: 100px;
+    height: 50px;
+    background:#4d7e29;
+    color: #f1f1f1;
+    font-family: $button-font;
+    text-transform: capitalize;
+}
+.update-cancel{
+    border-radius: 5px;
+    margin: 10px;
+    width: 100px;
+    height: 50px;
+    font-family: $button-font;
+    background: #FF2400;
+    color: #f1f1f1;
+    font-weight: 800;
+    font-size: 1em;
+    text-transform: capitalize;
+}

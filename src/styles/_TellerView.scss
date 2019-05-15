@@ -1,0 +1,139 @@
+.teller-find-account{
+    text-transform: capitalize;
+    margin: 5px;
+    padding: 5px;
+    font-size: 1.5em;
+}
+.account-find-input{
+    border-radius: 5px;
+    height: 35px;
+    font-size: 1em;
+    width: 50vw;
+}
+.find-account-button{
+    height: 40px;
+    color: #f1f1f1;
+    border-radius: 5px;
+    background:#4d7e29;
+    font-size: .75em;
+}
+.input-button-teller-container{
+    display: flex;
+    justify-content: center;
+}
+.teller-customer-info{
+
+    background: #f1f1f1;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: space-between;
+    height: 10vh;
+    align-items: center;
+}
+.teller-account-container{
+    
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+    justify-content: space-around;
+}
+.specific-view-teller{
+    font-size: 1.2em;
+}
+.teller-buttons{
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 800;
+    font-size: 1em;
+    width: 100px;
+    height: 50px;
+    background:#4d7e29;
+    color: #f1f1f1;
+    font-family: $button-font;
+    text-transform: capitalize;
+}
+.cancel-balance-change{
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 800;
+    font-size: 1em;
+    width: 100px;
+    height: 50px;
+    background: #FF2400;
+    color: #f1f1f1;
+    font-family: $button-font;
+    text-transform: capitalize; 
+}
+.confirm-balance-change{
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 800;
+    font-size: 1em;
+    width: 100px;
+    height: 50px;
+    background:#4d7e29;
+    color: #f1f1f1;
+    font-family: $button-font;
+    text-transform: capitalize;
+}
+.withdraw-button{
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 800;
+    font-size: 1em;
+    width: 100px;
+    height: 50px;
+    background: #FF2400;
+    color: #f1f1f1;
+    font-family: $button-font;
+    text-transform: capitalize;
+}
+.email-delete-container{
+    
+    background: #f1f1f1;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.delete-user-button{
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 800;
+    font-size: .75em;
+    width: 75px;
+    height: 30px;
+    background: #FF2400;
+    color: #f1f1f1;
+    font-family: $button-font;
+    text-transform: capitalize;
+}
+.select-menu{
+    margin: 5px;
+    width: 50vw;
+}
+.deposit-verification{
+    background: #939393;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+.select-input-container{
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+.amount-input{
+    height: 30px;
+    font-size: 1.5em;
+    width: 30vw;
+}

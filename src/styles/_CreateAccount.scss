@@ -1,0 +1,92 @@
+$font: 'Lato', sans-serif;
+
+.specific-input-container{
+    display: flex;
+    flex-direction: column;
+    font-family: $font;
+    font-weight: 700;
+    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
+    text-decoration: underline;
+    text-transform: capitalize;
+}
+.create-account-input{
+    width: 75vw;
+    border-radius: 5px;
+}
+.state-zip-container{
+    text-transform: capitalize;
+    font-family: $font;
+    font-weight: 700;
+    font-size: 1.5em;
+    text-decoration: underline;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.state-zip-input{
+    width: 35vw;
+    border-radius: 5px;
+}
+.state-container{
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.zip-container{
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.submit-account-button{
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 800;
+    font-size: 1em;
+    width: 100px;
+    height: 50px;
+    background:#4d7e29;
+    color: #f1f1f1;
+    font-family: $button-font;
+    text-transform: capitalize;
+}
+.cancel-account-button{
+    border-radius: 5px;
+    margin: 10px;
+    width: 100px;
+    height: 50px;
+    font-family: $button-font;
+    background: #FF2400;
+    color: #f1f1f1;
+    font-weight: 800;
+    font-size: 1em;
+    text-transform: capitalize;
+}
+.create-account-button-container{
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.welcome-text{
+    font-size: 2em;
+}
+.welcome-container{
+    
+    margin: 5px;
+    background: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+}
+.go-to-button{
+    height: 60px;
+    width: 160px;
+    background: #4d7e29;
+    font-size: 1.25em;
+    border-radius: 10px;
+    color: #f1f1f1
+}

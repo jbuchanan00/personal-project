@@ -1,13 +1,16 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
+import Axios from "axios";
+import {withRouter}from "react-router-dom"
+import {updateUserInfo} from "../../redux/userInfoReducer"
 
 
 
 
 class Header extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             dropMenuOpen: false
         }
@@ -18,21 +21,26 @@ class Header extends Component {
             dropMenuOpen: !this.state.dropMenuOpen
         })
     }
+    logout = async () => {
+        Axios.post("/auth/logout")
+        this.props.history.push("/")
+        window.location.reload()
+    }
     render() {
         let menu;
         let loggedInMenu;
 
-        if (!this.state.dropMenuOpen) {
+        if (this.state.dropMenuOpen) {
             if (!this.props.first_name) {
                 menu =
                     <div className="dropdown-menu">
-                        <Link to="/login" className="menu-link" >
-                            <p onClick={this.toggle}>Login</p>
+                        <Link to="/login" className="menu-link">
+                            <p onClick={this.toggle} >Login</p>
                         </Link>
                         <Link className="menu-link" to="/createaccount">
                             <p onClick={this.toggle}>Create An Account</p>
                         </Link>
-                        <Link className="menu-link">
+                        <Link className="menu-link" to="/info/bank">
                             <p onClick={this.toggle}>Additional Information</p>
                         </Link>
                     </div>
@@ -41,10 +49,12 @@ class Header extends Component {
                     loggedInMenu =
                         <div className="dropdown-menu">
                             <Link to="/info/account">
-                                <p onClick={this.toggle}>Account Info</p>
+                                <p onClick={this.toggle} className="menu-link">Account Info</p>
                             </Link>
-                            <p>Apply For Loan</p>
-                            <p>Update Info</p>
+                            <Link to="/info/updateaccount">
+                            <p onClick={this.toggle} className="menu-link">Update Info</p>
+                            </Link>
+                            <p className="menu-link">Apply For a Loan</p>
                         </div>
                 } else {
                     loggedInMenu =
@@ -53,17 +63,19 @@ class Header extends Component {
                                 <p onClick={this.toggle}>Account Info</p>
                             </Link>
                             <p>Apply For Loan</p>
-                            <p>Update Info</p>
+                            <Link to="/teller/updateaccount" className="menu-link">
+                            <p onClick={this.toggle}>Update Info</p>
+                            </Link>
                             <p>Loan Requests</p>
-                            <Link to="/teller/account" className="menu-link">
-                                <p onClick={this.toggle}>Teller</p>
+                            <Link to="/teller/account">
+                                <p onClick={this.toggle} className="menu-link">Teller</p>
                             </Link>
                         </div>
                 }
             }
         }
 
-
+        let typeOfMenu = (!this.state.dropMenuOpen) ? <i className="fas fa-bars" onClick={this.toggle} style={{fontSize: "1.25em"}}></i> : <i className="far fa-times-circle" style={{fontSize: "1.25em"}} onClick={this.toggle}></i>
 
         return (
 
@@ -75,14 +87,18 @@ class Header extends Component {
                                 <i className="fas fa-landmark"></i>
                             </Link>
                         </div>
-                        <div className="menu" onClick={this.toggle}>
-                            <i className="fas fa-bars"></i>
+                        <div className="menu-container">
+                        <div className="menu" >
+                            {typeOfMenu}
+                            <i className="fas fa-sign-out-alt" style={{fontSize: "1.25em"}} onClick={this.logout}></i>
+                        </div>
                         </div>
 
                     </header>
                     <div className="dropdown-menu">
                         {menu}
                         {loggedInMenu}
+                        
                     </div>
                 </div>
             </div>
@@ -94,5 +110,9 @@ const mapStateToProps = (state) => {
     let { first_name, isadmin } = state
     return { first_name, isadmin }
 }
+const mapDispatchToProps = {
+    updateUserInfo
+}
 
-export default connect(mapStateToProps)(Header)
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))

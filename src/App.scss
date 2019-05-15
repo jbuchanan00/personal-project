@@ -1,6 +1,10 @@
 @import "./styles/_Header.scss";
 @import "./styles/Login.scss";
 @import "./styles/AccountView";
+@import "./styles/CreateAccount";
+@import "./styles/Home";
+@import "./styles/UpdateInfo";
+@import "./styles/TellerView";
 
 .App {
   text-align: center;
@@ -52,6 +56,8 @@ header{
 .menu:hover{
   cursor: pointer;
 }
+
+
 
 
 @keyframes App-logo-spin {

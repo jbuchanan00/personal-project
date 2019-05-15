@@ -7,6 +7,7 @@ const authCtrl = require("./controllers/authController")
 const acctCtrl = require("./controllers/accountController")
 const userCtrl = require("./controllers/userController")
 
+
 const app = express()
 
 massive(CONNECTION_STRING).then(dbInstance => {
@@ -32,12 +33,17 @@ app.use(function(req, res, next) {
   });
 
 
-app.get("/api/getusers", acctCtrl.getData)
+
 app.get("/info/account", acctCtrl.getAccountBalance)
+app.get("/usersession", authCtrl.sessionKeeper)
 app.post("/auth/login", authCtrl.login)
 app.post("/auth/logout", authCtrl.logout)
 app.post("/auth/createaccount", authCtrl.createAccount)
-app.put("/update/balance", acctCtrl.updateBalance)
 app.put("/update/adminstatus", userCtrl.changeAdminStatus)
-app.delete("/account/delete/:email", userCtrl.deleteAccount)
+app.delete("/account/delete/:email/:account_number", userCtrl.deleteAccount)
 app.post("/account/teller", userCtrl.tellerAccount)
+app.put("/update/balance", acctCtrl.changeAccountBalance)
+app.put("/update/withdrawal", acctCtrl.withdrawFromAccount)
+app.post("/teller/updateinfo", acctCtrl.getUserInfo)
+app.put("/account/update", userCtrl.updateUserInfo)
+app.put("/teller/updateinfoteller", userCtrl.updateUserInfoAdmin)

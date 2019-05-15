@@ -1,7 +1,8 @@
 $color: white;
-$other-font: 'Just Another Hand', cursive;
-$title-font: 'Indie Flower', cursive;
+$other-font: 'Lato', sans-serif;
+$title-font: 'Noto Serif JP', serif;
 $main-box-color: #f1f1f1;
+$button-font: 'Paytone One', sans-serif;
 
 .login-container{
     margin: 5px;
@@ -24,7 +25,6 @@ $main-box-color: #f1f1f1;
     flex-direction: column;
     height: 35vh;
     font-family: $other-font;
-    
 }
 .login-button{
     width: 130px;
@@ -32,9 +32,10 @@ $main-box-color: #f1f1f1;
     margin: 10px;
     height: 40px;
     border-radius: 20px;
-    color: white;
+    color: #f1f1f1;
     font-size: 1em;
     font-weight: 800;
+    font-family: $button-font;
 }
 .login-button:active{
     background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)),#4d7e29;
@@ -42,21 +43,20 @@ $main-box-color: #f1f1f1;
 }
 .login-text{
     font-family: $title-font;
-    font-size: 4em;
+    font-size: 3.5em;
     margin: 0;
 }
 .input-description{
-    font-size: 2em;
-    
+    font-size: 1em;
+    font-weight: 200;
     margin: 15px;
 }
 .usernameEmail-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-around
+    justify-content: space-around;
 }
 .password-container{
-    
     display: flex;
     flex-direction: column;
     justify-content: space-around

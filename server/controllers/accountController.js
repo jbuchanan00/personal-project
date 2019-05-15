@@ -1,88 +1,79 @@
 module.exports = {
-    getData: async (req, res) => {
-        const db = req.app.get("db")
-        
-        const users = await db.get_all_data()
-        res.status(200).send(users)
-    },
     getAccountBalance: async (req, res) => {
         const db = req.app.get("db")
-        console.log(1111111111111111, req.session.user)
-        const {first_name, last_name, account_number} = req.session.user
+        const {account_number} = req.session.user
 
         let accountBalance = await db.get_balances({account_number})
         accountBalance = accountBalance[0]
         res.status(200).send(accountBalance)
     },
-    updateBalance: async (req, res) => {
+    changeAccountBalance: async (req, res) => {
+        //want to use account number to update balance
+        //get the account type, db is split between them
+        //only send status back
+
         const db = req.app.get("db")
-        const {first_name, last_name, isadmin} = req.session.user
-        const {account_type, amount, account_number} = req.body
-       
-        if(!isadmin){
-            return res.status(401).send(`Access Denied`)
+
+        let {account_type, account_number, amount} = req.body
+        console.log(account_number, account_type, amount)
+        
+        let beginningBalance = await db.get_balances({account_number})
+        let {savings_balance, checkings_balance, credit_card_balance, auto_loan_balance, personal_loan_balance} = beginningBalance[0]
+        if(account_type === "checkings"){ checkings_balance += +amount
+        await db.update_checkings_balance({account_number, checkings_balance})
+        }
+        if(account_type === "savings"){savings_balance += +amount
+        await db.update_savings_balance({account_number, savings_balance})
+        }
+        if(account_type === "credit_card"){credit_card_balance += +amount
+        await db.update_cc_balance({account_number, credit_card_balance})
+        }
+        if(account_type === "auto_loan"){auto_loan_balance += +amount
+        await db.update_auto_balance({account_number, auto_loan_balance})
+        }
+        if(account_type === "personal_loan"){personal_loan_balance += +amount
+        await db.update_personal_balance({account_number, personal_loan_balance})
         }
 
 
+        res.status(200).send(`Was completed succesfully`)
+    },
+    withdrawFromAccount: async (req, res) => {
+        //want to use account number to update balance
+        //get the account type, db is split between them
+        //only send status back
 
-        if(account_type === 'savings'){
-            let accountBalance = await db.update_savings_balance({account_number, amount})
-            accountBalance = accountBalance[0]
-            
-            let {savings_balance, checkings_balance, auto_loan_balance, personal_loan_balance, credit_card_balance} = accountBalance
-    
-            const welcomePage = `Welcome ${first_name} ${last_name}.  Your balances are savings: $${savings_balance} checking: $${checkings_balance}
-            auto loan: $${auto_loan_balance} personal loan: $${personal_loan_balance} credit card: $${credit_card_balance}`
-    
-            return res.status(200).send(welcomePage)
-            
-        }
-        if(account_type === 'checkings'){
-            let accountBalance = await db.update_checkings_balance({account_number, amount})
-            accountBalance = accountBalance[0]
-            
-            let {savings_balance, checkings_balance, auto_loan_balance, personal_loan_balance, credit_card_balance} = accountBalance
-    
-            const welcomePage = `Welcome ${first_name} ${last_name}.  Your balances are savings: $${savings_balance} checking: $${checkings_balance}
-            auto loan: $${auto_loan_balance} personal loan: $${personal_loan_balance} credit card: $${credit_card_balance}`
-    
-            return res.status(200).send(welcomePage)
-        }
+        const db = req.app.get("db")
 
-        if(account_type === 'auto_loan'){
-            let accountBalance = await db.update_auto_balance({account_number, amount})
-            accountBalance = accountBalance[0]
-            
-            let {savings_balance, checkings_balance, auto_loan_balance, personal_loan_balance, credit_card_balance} = accountBalance
-    
-            const welcomePage = `Welcome ${first_name} ${last_name}.  Your balances are savings: $${savings_balance} checking: $${checkings_balance}
-            auto loan: $${auto_loan_balance} personal loan: $${personal_loan_balance} credit card: $${credit_card_balance}`
-    
-            return res.status(200).send(welcomePage)
+        let {account_type, account_number, amount} = req.body
+        console.log(account_number, account_type, amount)
+        
+        let beginningBalance = await db.get_balances({account_number})
+        let {savings_balance, checkings_balance, credit_card_balance, auto_loan_balance, personal_loan_balance} = beginningBalance[0]
+        if(account_type === "checkings"){ checkings_balance -= +amount
+        await db.update_checkings_balance({account_number, checkings_balance})
+        }
+        if(account_type === "savings"){savings_balance -= +amount
+        await db.update_savings_balance({account_number, savings_balance})
+        }
+        if(account_type === "credit_card"){credit_card_balance -= +amount
+        await db.update_cc_balance({account_number, credit_card_balance})
+        }
+        if(account_type === "auto_loan"){auto_loan_balance -= +amount
+        await db.update_auto_balance({account_number, auto_loan_balance})
+        }
+        if(account_type === "personal_loan"){personal_loan_balance -= +amount
+        await db.update_personal_balance({account_number, personal_loan_balance})
         }
 
-        if(account_type === 'personal_loan'){
-            let accountBalance = await db.update_personal_balance({account_number, amount})
-            accountBalance = accountBalance[0]
-            
-            let {savings_balance, checkings_balance, auto_loan_balance, personal_loan_balance, credit_card_balance} = accountBalance
-    
-            const welcomePage = `Welcome ${first_name} ${last_name}.  Your balances are savings: $${savings_balance} checking: $${checkings_balance}
-            auto loan: $${auto_loan_balance} personal loan: $${personal_loan_balance} credit card: $${credit_card_balance}`
-    
-            return res.status(200).send(welcomePage)
-        }
 
-        if(account_type === 'credit_card'){
-            let accountBalance = await db.update_cc_balance({account_number, amount})
-            accountBalance = accountBalance[0]
-            
-            let {savings_balance, checkings_balance, auto_loan_balance, personal_loan_balance, credit_card_balance} = accountBalance
-    
-            const welcomePage = `Welcome ${first_name} ${last_name}.  Your balances are savings: $${savings_balance} checking: $${checkings_balance}
-            auto loan: $${auto_loan_balance} personal loan: $${personal_loan_balance} credit card: $${credit_card_balance}`
-    
-            return res.status(200).send(welcomePage)
-        }
+        res.status(200).send(`Was completed succesfully`)
+    },
+    getUserInfo: async (req, res) => {
+        const db = req.app.get("db")
+
+        let {account_number} = req.body
+        let results = await db.get_details_by_account({account_number})
+        res.status(200).send(results[0])
     }
 }

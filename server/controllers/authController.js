@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs")
+const nodemailer = require("nodemailer")
 
 
 module.exports = {
@@ -16,7 +17,6 @@ module.exports = {
 
         const existingUser = await db.get_user_by_email({email})
         if(existingUser[0]){
-            console.log(`email existing`)
             return res.status(409).send(`Email already in use`)
         }
 
@@ -32,7 +32,32 @@ module.exports = {
         delete newUser.birthday
         delete newUser.password 
         
-        console.log(newUser)
+
+        
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            port: 587,
+            auth: {
+                user: "bankapptest1@gmail.com",
+                pass: 'utahjazz45'
+            }
+        })
+
+        let message = {
+            from: "bankapptest1@gmail.com",
+            to: `${newUser.email}`,
+            subject: `Thank you ${newUser.first_name}!`,
+            html: `<p>Welcome to La Banque</p><p>Your account number is ${newUser.account_number}</p><p>Your username is ${newUser.username}</p>`
+        }
+
+        transporter.sendMail(message, function (err, info) {
+            if(err){
+                console.log(err)
+            }else{
+                console.log(info)
+            }
+        })
+
         req.session.user = newUser
         res.status(200).send(req.session.user)
     },
@@ -41,7 +66,6 @@ module.exports = {
         const {usernameEmail, password} = req.body
         let username = usernameEmail
         let email = false
-        console.log(req.body)
         let user;
         if(email){
             user = await db.get_user_by_email({username, email, password})
@@ -63,7 +87,6 @@ module.exports = {
             delete authUser.password
             
             req.session.user = authUser
-            console.log(req.session.user)
             return res.status(200).send(req.session.user)
         }
         
@@ -94,5 +117,12 @@ module.exports = {
     logout: (req, res) => {
         req.session.destroy()
         res.sendStatus(200)
+    },
+    sessionKeeper: (req, res) => {
+        if(req.session.user){
+        res.status(200).send(req.session.user)
+        }else{
+            res.status(401).send("not logged in")
+        }
     }
 }

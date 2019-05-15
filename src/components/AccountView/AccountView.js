@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import axios from "axios"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
+import {updateUserInfo} from "../../redux/userInfoReducer"
 
 class AccountView extends Component {
     constructor() {
@@ -28,6 +29,13 @@ class AccountView extends Component {
                 creditCard: credit_card_balance
             })
         })
+        if(!this.state.first_name){
+        this.sessionInfo()}
+    }
+
+    sessionInfo = async () => {
+        let session = await axios.get("/usersession")
+        this.props.updateUserInfo(session.data)
     }
 
     render() {
@@ -36,7 +44,7 @@ class AccountView extends Component {
         let personalLoanView;
         let notLoggedIn;
 
-        if (this.state.autoLoan === 0) {
+        if (this.state.autoLoan !== 0) {
             autoLoanView =
                 <div className="account-balance-container">
                     <div className="inside-container-balance">
@@ -48,7 +56,7 @@ class AccountView extends Component {
                     <button className="history-button">History</button>
                 </div>
         }
-        if (this.state.personalLoan === 0) {
+        if (this.state.personalLoan !== 0) {
             personalLoanView =
                 <div className="account-balance-container">
                     <div className="inside-container-balance">
@@ -61,12 +69,12 @@ class AccountView extends Component {
                 </div>
         }
 
-        //need to switch to true after styling.
-        if (!this.props.first_name) {
+        
+        if (this.props.first_name) {
             (loggedIn =
                 <div className="account-view-total">
                     <div className="welcome-name">
-                        Welcome Name{this.props.first_name}!
+                        Welcome {this.props.first_name}!
                     </div>
                     <div className="account-balances-view">
                         <div className="account-balance-container">
@@ -120,6 +128,10 @@ const mapStatetoProps = (state) => {
     return { first_name, lastName, accountNumber, isadmin }
 }
 
+const mapDispatchToProps = {
+    updateUserInfo
+}
 
-export default connect(mapStatetoProps)(withRouter(AccountView))
+
+export default connect(mapStatetoProps, mapDispatchToProps)(withRouter(AccountView))
 

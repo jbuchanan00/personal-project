@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3em;
+    font-size: 2em;
     font-family: $title-font;
     text-transform: capitalize;
     box-shadow: 5px 5px, black;
@@ -19,8 +19,8 @@
     background-color: #f1f1f1;
     border-radius: 10px;
     height: 10vh;
-    font-family: 'Just Another Hand', cursive;
-    font-size: 2em;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.4em;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -52,7 +52,7 @@
     text-align: center;
 }
 span{
-    width: 50vw;
+    width: 30vw;
     text-align: center;
 }
 .history-button{
@@ -69,5 +69,4 @@ span{
     width: 40%;
     color: white;
     border-radius: 10px 0px 0px 10px;
-    
 }

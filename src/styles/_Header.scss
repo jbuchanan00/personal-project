@@ -5,8 +5,8 @@
 }
 .menu-link:visited{
     color: #f1f1f1;
-    
     text-decoration: none;
+    text-transform: none;
 }
 .logo-to-home:visited{
     color: black;
@@ -18,9 +18,20 @@
     background-color: #939393;
     border-radius: 0px 0px 10px 10px;
     color: #f1f1f1;
-    
+    font-weight: 800;
 }
 .header-with-dropdown{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+.menu{
+    width: 100px;
+    display: flex;
+    justify-content: space-around;
+}
+.menu-container{
+    display: block;
+    float: right;
+    width: 140px;
 }
