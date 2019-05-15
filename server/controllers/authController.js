@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs")
 const nodemailer = require("nodemailer")
+const {email, password} = process.env
 
 
 module.exports = {
@@ -38,13 +39,13 @@ module.exports = {
             service: 'gmail',
             port: 587,
             auth: {
-                user: "bankapptest1@gmail.com",
-                pass: 'utahjazz45'
+                user: email,
+                pass: password
             }
         })
 
         let message = {
-            from: "bankapptest1@gmail.com",
+            from: email,
             to: `${newUser.email}`,
             subject: `Thank you ${newUser.first_name}!`,
             html: `<p>Welcome to La Banque</p><p>Your account number is ${newUser.account_number}</p><p>Your username is ${newUser.username}</p>`
