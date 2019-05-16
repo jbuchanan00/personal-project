@@ -13,18 +13,22 @@ $button-font: 'Paytone One', sans-serif;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    
 }
 .usernameEmail{
     border-radius: 5px;
+    font-size: 1.5em;
 }
 .login-password{
     border-radius: 5px;
+    font-size: 1.5em;
 }
 .login-text-input{
     display: flex;
     flex-direction: column;
     height: 35vh;
     font-family: $other-font;
+    align-items: center;
 }
 .login-button{
     width: 130px;
@@ -36,6 +40,8 @@ $button-font: 'Paytone One', sans-serif;
     font-size: 1em;
     font-weight: 800;
     font-family: $button-font;
+    box-shadow: 2px 2px 1px black;
+    
 }
 .login-button:active{
     background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)),#4d7e29;
@@ -55,9 +61,23 @@ $button-font: 'Paytone One', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    
 }
 .password-container{
     display: flex;
     flex-direction: column;
     justify-content: space-around
+}
+@media (min-width: 750px){
+    .login-container{
+        box-shadow: 5px 5px 5px black;
+        max-width: 500px;
+        min-width: 500px;
+    }
+    .login-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 75vh;
+    }
 }

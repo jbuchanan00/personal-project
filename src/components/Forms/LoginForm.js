@@ -36,7 +36,7 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <div>
+            <div className="login-body">
                 <div className="login-container">
                     <h2 className="login-text">Login</h2>
                     <div className="login-text-input">

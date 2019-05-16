@@ -8,7 +8,8 @@ class UpdateBalanceForm extends Component {
         super()
         this.state = {
             account_type: "",
-            amount: 0
+            amount: 0,
+            account_type_tag: ""
         }
     }
 
@@ -20,7 +21,8 @@ class UpdateBalanceForm extends Component {
     }
     handleSelect = (account_type) => {
         this.setState({
-            account_type: account_type.value
+            account_type: account_type.value,
+            account_type_tag: account_type.label
         })
     }
 
@@ -34,6 +36,7 @@ class UpdateBalanceForm extends Component {
 
 
     render() {
+        let placeholderAccount = (!this.state.account_type) ? <p>Select Account</p> : <p>{this.state.account_type_tag}</p>
         const options = [
             { value: "checkings", label: "Checkings" },
             { value: "savings", label: "Savings" },
@@ -42,8 +45,9 @@ class UpdateBalanceForm extends Component {
             { value: "credit_card", label: "Credit Card" }
         ]
         let window = (this.props.windowOpen === "true") ? <div className="deposit-verification">
+            <div className="type-of-account-dw">{this.state.account_type_tag}</div>
             <div className="select-input-container">
-                <Select options={options} value={this.state.account_type} onChange={this.handleSelect} name={this.state.account_type} className="select-menu" placeholder={this.state.account_type} />
+                <Select options={options} value={this.state.account_type} onChange={this.handleSelect} name={this.state.account_type} className="select-menu" placeholder={placeholderAccount} />
                 <input onChange={this.handleInput} placeholder="amount" name="amount" className="amount-input"></input>
             </div>
             <div className="update-balance-buttons">

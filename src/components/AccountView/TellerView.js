@@ -35,8 +35,8 @@ class TellerView extends Component {
             let session = await axios.get("/usersession")
             this.props.updateUserInfo(session.data)
         }
-        catch (error) {
-            console.log(error)
+        catch (err) {
+            console.log(err)
         }
     }
 
@@ -48,15 +48,21 @@ class TellerView extends Component {
     }
     sumbitAccountNumber = () => {
         let { account_number } = this.state
+        if (this.props.account_number === account_number) {
+            alert("You cannot adjust your account.")
+            return
+        }
         axios.post("/account/teller", { account_number }).then(res => {
-            if(this.state.ssn){
+            if (this.state.ssn) {
                 window.location.reload()
             }
-            if(!res.data[0]){return (
-            this.setState({
-                ableToFindAccount: false
-            }))}
-            
+            if (!res.data[0]) {
+                return (
+                    this.setState({
+                        ableToFindAccount: false
+                    }))
+            }
+
             let { ssn, birthday, savings_balance, checkings_balance, auto_loan_balance, personal_loan_balance,
                 credit_card_balance, email } = res.data[0]
             this.setState({
@@ -114,32 +120,31 @@ class TellerView extends Component {
 
     render() {
         let { saved_account_number } = this.state
-        let adminStatus;
+
 
         let accountFalse = (this.state.ableToFindAccount) ? null : <h2>Unable to find account</h2>
-        let accountAlreadyFound = (this.state.ssn) ? <button onClick={this.reloadPage} className="find-account-button">Exit Account</button> : 
-        <div className="input-button-teller-container">
-        <input name="account_number" value={this.state.account_number} onChange={this.accountNumberChange} className="account-find-input"></input>
-        <button onClick={this.sumbitAccountNumber} className="find-account-button">Get Account</button>
-        </div>
-        if (!this.props.isadmin) {
-            adminStatus = <h1>Unauthorized Access</h1>
-        } else {
-            adminStatus =
-                <div className="teller-find-account">
-                    <div className="welcome-teller-name">Hello {this.props.first_name}</div>
-                    
-                        {accountAlreadyFound}
-                        
-                    
+        let accountAlreadyFound = (this.state.ssn) ? <button onClick={this.reloadPage} className="find-account-button">Exit Account</button> :<div>
+                <div className="input-button-teller-container">
+                    <input name="account_number" value={this.state.account_number} onChange={this.accountNumberChange} className="account-find-input"></input>
+                    <button onClick={this.sumbitAccountNumber} className="find-account-button">Get Account</button>
                 </div>
-        }
+                <h3 className="welcome-teller-name">BALANCE</h3>
+            </div>
+        let adminStatus = (!this.props.isadmin) ?
+            <h1>Unauthorized Access</h1>
+            :
+            <div className="teller-find-account">
+                <div className="welcome-teller-name">Hello {this.props.first_name}</div>
+                {accountAlreadyFound}
+            </div>
+
         let accountFound = !this.state.ssn ? null : (<div>
             <div className="teller-customer-info">
                 <div className="teller-account-view-specific">Acct:{this.state.saved_account_number}</div>
 
+                <div className="teller-account-view-specific-desktop">SSN: {this.state.ssn}</div>
+                <div className="teller-account-view-specific-desktop">Birthday: {this.state.birthday}</div>
 
-                <div className="teller-account-view-specific">{this.state.first_name} {this.state.last_name}</div>
 
 
 

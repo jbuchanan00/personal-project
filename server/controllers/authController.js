@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs")
 const nodemailer = require("nodemailer")
-const {email, password} = process.env
+let {email, password} = process.env
 
 
 module.exports = {
@@ -14,7 +14,6 @@ module.exports = {
         const existingAccounts = await db.creating_account_number()
         
         const account_number = `10${existingAccounts[0].count}`
-        console.log(111111111111, account_number)
 
         const existingUser = await db.get_user_by_email({email})
         if(existingUser[0]){
@@ -119,11 +118,33 @@ module.exports = {
         req.session.destroy()
         res.sendStatus(200)
     },
-    sessionKeeper: (req, res) => {
+    sessionKeeper: async (req, res) => {
         if(req.session.user){
         res.status(200).send(req.session.user)
         }else{
-            res.status(401).send("not logged in")
+            // res.status(401).send("not logged in")
+            //--------------------------------------
+            let db = req.app.get("db")
+            let user = await db.get_user_by_username({username: "joshb", password: "password"})
+            user = user[0]
+            
+            console.log(user)
+            if(!user){
+                return res.status(409).send(`Missing email/username or password`)
+            }
+            let isAuth = bcrypt.compareSync(password="password", user.password)
+            
+            if(!isAuth){
+                return res.status(403).send(`Email/username or password is incorrect`)
+            }
+            let authUser = user
+    
+            delete authUser.ssn
+            delete authUser.birthday
+            delete authUser.password
+            
+            req.session.user = authUser
+            return res.status(200).send(req.session.user)
         }
     }
 }

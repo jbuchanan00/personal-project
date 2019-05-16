@@ -86,43 +86,55 @@ class UpdateUserInfoAdmin extends Component {
     }
 
     render() {
-        let adminUse = (this.props.isadmin) ?
-            <div>
-                <div className="welcome-teller-name">Hello {this.props.first_name}</div>
-                <div>
+        let adminStatus = (this.state.isadmin) ?
+            <div className="admin-boolean-container">
+                <p className="text-admin-true">Is an Employee</p>
+                <button className="admin-is-true" onClick={this.toggleAdmin}>Admin</button>
+            </div> :
+            <div className="admin-boolean-container">
+                <p className="text-admin-false">Not an employee</p>
+                <button className="admin-is-false" onClick={this.toggleAdmin}>Admin</button>
+            </div>
 
-                    <input placeholder="search for account" name="account_number" className="account-find-input" onChange={this.handleChange} value={this.state.account_number} />
-                    <div className="teller-find-account">
-                        <button className="find-account-button" onClick={this.getUserInfo}>Get Account</button>
+        let adminUse = (this.props.isadmin) ?
+            <div className="update-info-teller-container">
+                <div className="teller-find-account-info">
+                    <div className="welcome-teller-name">Hello {this.props.first_name}</div>
+                    <div>
+
+                        <input name="account_number" className="account-find-input-info" onChange={this.handleChange} value={this.state.account_number} />
+
+                        <button className="find-account-button-info" onClick={this.getUserInfo}>Get Account</button>
                     </div>
+                    <h3 className="welcome-teller-name">INFO</h3>
                 </div>
-            </div> : null
+            </div> : <h1>Access Denied</h1>
 
         let accountFound = (!this.state.first_name) ? null :
             <div>
                 <div className="admin-info-container">
-                    <p>First Name</p>
-                    <input placeholder="first name" name="first_name" value={this.state.first_name} onChange={this.handleChange} className="info-input"/>
-                    <p>Last Name</p>
-                    <input placeholder="last name" name="last_name" value={this.state.last_name} onChange={this.handleChange} className="info-input"/>
-                    <p>Admin Status</p>
-                    <p>{this.state.isadmin}</p><button onClick={this.toggleAdmin}>Admin</button>
-                    <p>Phone Number</p>
-                    <input placeholder="phone number" name="phone_number" value={this.state.phone_number} onChange={this.handleChange} className="info-input"/>
-                    <p>Street Address</p>
-                    <input placeholder="street" name="street" value={this.state.street} onChange={this.handleChange} className="info-input"/>
-                    <p>City</p>
-                    <input placeholder="city" name="city" value={this.state.city} onChange={this.handleChange} className="info-input"/>
-                    <p>Zip Code</p>
-                    <input placeholder="zip" name="zip" value={this.state.zip} onChange={this.handleChange} className="info-input"/>
-                    <p>State</p>
-                    <input placeholder="state" name="state" value={this.state.state} onChange={this.handleChange} className="info-input"/>
-                    <p>Email</p>
-                    <input placeholder="email" name="email" value={this.state.email} onChange={this.handleChange} className="info-input"/>
+                    <p className="udpate-description">First Name</p>
+                    <input placeholder="first name" name="first_name" value={this.state.first_name} onChange={this.handleChange} className="info-input" />
+                    <p className="udpate-description">Last Name</p>
+                    <input placeholder="last name" name="last_name" value={this.state.last_name} onChange={this.handleChange} className="info-input" />
+                    <p className="udpate-description">Admin Status</p>
+                    {adminStatus}
+                    <p className="udpate-description">Phone Number</p>
+                    <input placeholder="phone number" name="phone_number" value={this.state.phone_number} onChange={this.handleChange} className="info-input" />
+                    <p className="udpate-description">Street Address</p>
+                    <input placeholder="street" name="street" value={this.state.street} onChange={this.handleChange} className="info-input" />
+                    <p className="udpate-description">City</p>
+                    <input placeholder="city" name="city" value={this.state.city} onChange={this.handleChange} className="info-input" />
+                    <p className="udpate-description">Zip Code</p>
+                    <input placeholder="zip" name="zip" value={this.state.zip} onChange={this.handleChange} className="info-input" />
+                    <p className="udpate-description">State</p>
+                    <input placeholder="state" name="state" value={this.state.state} onChange={this.handleChange} className="info-input" />
+                    <p className="udpate-description">Email</p>
+                    <input placeholder="email" name="email" value={this.state.email} onChange={this.handleChange} className="info-input" />
                 </div>
                 <div>
-                    <button onClick={this.handleSubmit}>Submit Changes</button>
-                    <button onClick={this.handleCancel}>Cancel Changes</button>
+                    <button className="update-submit" onClick={this.handleSubmit}>Submit Changes</button>
+                    <button className="update-cancel" onClick={this.handleCancel}>Cancel Changes</button>
                 </div>
 
             </div>
