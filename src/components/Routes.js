@@ -8,6 +8,10 @@ import NewAccountInfo from "../components/InfoViews/NewAccountInfo"
 import TellerView from "../components/AccountView/TellerView"
 import UpdateUserInfo from "../components/Forms/UpdateUserInfo"
 import UpdateUserInfoAdmin from "./Forms/UpdateUserInfoAdmin";
+import AFLPersonalInfo from "./applyingforloan/AFLPersonalInfo"
+import AFLRequest from "./applyingforloan/AFLRequest"
+import AFLEmploymentInfo from "./applyingforloan/AFLEmploymentInfo"
+
 
 
 
@@ -20,6 +24,9 @@ export default(
         <Route path="/info/newaccount" component={NewAccountInfo} />
         <Route path="/teller/account" component={TellerView} />
         <Route path="/info/updateaccount" component={UpdateUserInfo} />
+        <Route path="/apply/1" component={AFLPersonalInfo}/>
         <Route path="/teller/updateaccount" component={UpdateUserInfoAdmin} />
+        <Route path="/apply/2" component={AFLEmploymentInfo} />
+        <Route path="/apply/3" component={AFLRequest} />
     </Switch>
 )

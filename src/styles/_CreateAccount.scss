@@ -90,3 +90,51 @@ $font: 'Lato', sans-serif;
     border-radius: 10px;
     color: #f1f1f1
 }
+@media (min-width: 750px){
+    .full-create-account-container{
+        
+        width: 750px;
+        margin: 5px;
+        
+    }
+    .create-body{
+        display: flex;
+        justify-content: center;
+    }
+    .first-step-container{
+        border-bottom: 1px solid #000;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 5px;
+        padding: 5px;
+    }
+    .create-account-input{
+        width: 150px;
+        height: 30px;
+        font-size: 1em;
+        
+    }
+    .state-zip-input{
+        width: 50px;
+        height: 30px;
+        font-size: 1em;
+    }
+    .state-zip-container{
+        width: 25%;
+        height: 70px;
+        text-decoration: none;
+    }
+    .specific-input-container{
+        text-align: left;
+        text-decoration: none;
+        font-family: $font;
+        display: flex;
+        align-items: flex-start;
+    }
+    .create-account-button-container{
+        flex-direction: row-reverse;
+        text-decoration: underline;
+    }
+    
+}

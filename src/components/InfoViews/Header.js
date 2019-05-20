@@ -46,14 +46,16 @@ class Header extends Component {
                 :
                 (!this.props.isadmin) ?
 
-                    <div className="dropdown-menu">
-                        <Link to="/info/account">
-                            <p onClick={this.toggle} className="menu-link">Account Info</p>
+                    <div className="dropdown-menu" >
+                        <Link to="/info/account" className="menu-link">
+                            <p onClick={this.toggle} >Account Info</p>
                         </Link>
-                        <Link to="/info/updateaccount">
-                            <p onClick={this.toggle} className="menu-link">Update Info</p>
+                        <Link to="/info/updateaccount" className="menu-link">
+                            <p onClick={this.toggle} >Update Info</p>
                         </Link>
+                        <Link className="menu-link" to="/apply/1">
                         <p className="menu-link">Apply For a Loan</p>
+                        </Link>
                     </div>
                     :
 
@@ -93,13 +95,15 @@ class Header extends Component {
                 (!this.props.isadmin) ?
 
                     <div className="hidden-menu-desktop">
-                        <Link to="/info/account">
-                            <p onClick={this.toggle} className="menu-link">Account Info</p>
+                        <Link to="/info/account"className="menu-link">
+                            <p onClick={this.toggle}>Account Info</p>
                         </Link>
-                        <Link to="/info/updateaccount">
-                            <p onClick={this.toggle} className="menu-link">Update Info</p>
+                        <Link to="/info/updateaccount" className="menu-link">
+                            <p onClick={this.toggle} >Update Info</p>
                         </Link>
+                        <Link className="menu-link" to="/apply/1">
                         <p className="menu-link">Apply For a Loan</p>
+                        </Link>
                         <div className="logout-icon-desktop">
                             <i className="fas fa-sign-out-alt" style={{ fontSize: "2em" }} onClick={this.logout}></i>
                         </div>
@@ -113,7 +117,9 @@ class Header extends Component {
                         <Link to="/teller/updateaccount" className="menu-link">
                             <p onClick={this.toggle}>Update Info</p>
                         </Link>
+                        <Link to="" className="menu-link">
                         <p>Loan Requests</p>
+                        </Link>
                         <Link to="/teller/account" className="menu-link">
                             <p onClick={this.toggle} >Teller</p>
                         </Link>
@@ -162,12 +168,10 @@ class Header extends Component {
 
 
 const mapStateToProps = (state) => {
-    let { first_name, isadmin } = state
+    let { first_name, isadmin } = state.userInfoReducer
     return { first_name, isadmin }
 }
-const mapDispatchToProps = {
-    updateUserInfo
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
+
+export default connect(mapStateToProps,{updateUserInfo})(withRouter(Header))

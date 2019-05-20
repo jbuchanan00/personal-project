@@ -9,24 +9,26 @@
 }
 .info-container{
     margin: 5px;
-    height: 65vh;
+    height: 550px;
     background: #f1f1f1;
     border-radius: 5px;
     font-weight: 800;
     font-family: $other-font;
     box-shadow: 1px 1px 1px gray;
+    
 }
 .info-input{
     border-radius: 5px;
     font-size: 1.5em;
-    box-shadow: 1px 1px 1px gray;
+    
 }
 .name-container{
     margin: 5px;
     display: flex;
     justify-content: center;
     align-content: center;
-    box-shadow: 1px 1px 1px gray;
+    
+    
 }
 .update-submit{
     border-radius: 5px;
@@ -87,6 +89,7 @@
     font-size: 1em;
     text-transform: capitalize;
     box-shadow: 1px 1px 1px gray;
+    animation: oppColorChange 1s linear 0s 1 normal ;
 }
 .admin-is-true{
     border-radius: 5px;
@@ -100,6 +103,7 @@
     font-family: $button-font;
     text-transform: capitalize;
     box-shadow: 1px 1px 1px gray;
+    animation: colorChange 1s linear 0s 1 normal ;
 }
 .udpate-description{
     text-decoration: underline;
@@ -138,5 +142,48 @@
 }
 .welcome-teller-name{
     font-family: $title-font
+}
+@media (min-width: 750px){
+    .admin-info-container{
+        margin: 10px;
+    }
+    .udpate-description{
+        width: 400px;
+        font-size: 2em;
+    }
+    .desktop-info-container{
+        width: 90%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .info-input{
+        height: 50%;  
+    }
+    
+    .admin-boolean-container{
+        background: none;
+        width: 200px;
+    }
+    .info-container{
+        height: 70vh;
+    }
+    
+}
+@keyframes colorChange{
+    from{
+        background: #FF2400
+    }
+    to {
+        background: #4d7e29
+    }
+}
+@keyframes oppColorChange{
+    from{
+        background: #4d7e29
+    }
+    to{
+        background: #FF2400
+    }
 }
 

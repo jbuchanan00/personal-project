@@ -30,15 +30,15 @@ class TellerView extends Component {
         }
     }
 
-    async componentDidMount() {
-        try {
-            let session = await axios.get("/usersession")
-            this.props.updateUserInfo(session.data)
-        }
-        catch (err) {
-            console.log(err)
-        }
-    }
+    // async componentDidMount() {
+    //     try {
+    //         let session = await axios.get("/usersession")
+    //         this.props.updateUserInfo(session.data)
+    //     }
+    //     catch (err) {
+    //         console.log(err)
+    //     }
+    // }
 
     accountNumberChange = (e) => {
         let { name, value } = e.target
@@ -119,17 +119,19 @@ class TellerView extends Component {
 
 
     render() {
+        console.log(this.state)
         let { saved_account_number } = this.state
 
-
+        let blurredBackground = (!this.state.windowOpen && !this.state.withdrawOpen) ? null : <div className="blurred-background-teller"></div>
         let accountFalse = (this.state.ableToFindAccount) ? null : <h2>Unable to find account</h2>
-        let accountAlreadyFound = (this.state.ssn) ? <button onClick={this.reloadPage} className="find-account-button">Exit Account</button> :<div>
-                <div className="input-button-teller-container">
-                    <input name="account_number" value={this.state.account_number} onChange={this.accountNumberChange} className="account-find-input"></input>
-                    <button onClick={this.sumbitAccountNumber} className="find-account-button">Get Account</button>
-                </div>
-                <h3 className="welcome-teller-name">BALANCE</h3>
+        let accountAlreadyFound = (this.state.ssn) ? <button onClick={this.reloadPage} className="find-account-button">Exit Account</button> : <div>
+            <div className="input-button-teller-container">
+                {blurredBackground}
+                <input name="account_number" value={this.state.account_number} onChange={this.accountNumberChange} className="account-find-input"></input>
+                <button onClick={this.sumbitAccountNumber} className="find-account-button">Get Account</button>
             </div>
+            <h3 className="welcome-teller-name">TRANSACTION</h3>
+        </div>
         let adminStatus = (!this.props.isadmin) ?
             <h1>Unauthorized Access</h1>
             :
@@ -138,9 +140,10 @@ class TellerView extends Component {
                 {accountAlreadyFound}
             </div>
 
-        let accountFound = !this.state.ssn ? null : (<div>
+        let accountFound = this.state.ssn ? null : (<div>
             <div className="teller-customer-info">
-                <div className="teller-account-view-specific">Acct:{this.state.saved_account_number}</div>
+                {blurredBackground}
+                <div className="teller-account-view-specific">Acct: {this.state.saved_account_number}</div>
 
                 <div className="teller-account-view-specific-desktop">SSN: {this.state.ssn}</div>
                 <div className="teller-account-view-specific-desktop">Birthday: {this.state.birthday}</div>
@@ -151,36 +154,36 @@ class TellerView extends Component {
             </div>
             <div className="teller-account-container">
                 <div className="account-view-teller">
-                    <div className="specific-view-teller">Savings: {this.state.savings}</div>
+                    <div className="specific-view-teller">Savings: ${this.state.savings}</div>
 
                 </div>
                 <div className="account-view-teller">
-                    <div className="specific-view-teller">Checkings: {this.state.checkings}</div>
+                    <div className="specific-view-teller">Checkings: ${this.state.checkings}</div>
 
                 </div>
                 <div className="account-view-teller">
-                    <div className="specific-view-teller">Auto Loan: {this.state.auto_loan}</div>
+                    <div className="specific-view-teller">Auto Loan: ${this.state.auto_loan}</div>
 
                 </div>
                 <div className="account-view-teller">
-                    <div className="specific-view-teller">Personal Loan: {this.state.personal_loan}</div>
+                    <div className="specific-view-teller">Personal Loan: ${this.state.personal_loan}</div>
 
                 </div>
                 <div className="account-view-teller">
-                    <div className="specific-view-teller">Credit Card: {this.state.credit_card}</div>
+                    <div className="specific-view-teller">Credit Card: ${this.state.credit_card}</div>
 
                 </div>
             </div>
             <button onClick={this.depositButton} className="teller-buttons">Deposit</button><button onClick={this.withdrawButton} className="withdraw-button ">Withdrawal</button>
 
-            <UpdateBalanceForm windowOpen={this.state.windowOpenString} windowToggle={this.depositButton} account_number={this.state.saved_account_number} />
 
-            <WithdrawalBalanceForm windowOpen={this.state.withdrawWindowOpenString} windowToggle={this.withdrawButton} account_number={this.state.saved_account_number} />
 
             <div className="email-delete-container">
                 <div className="specific-view-teller">{this.state.email}</div>
                 <DeleteUser email={this.state.email} account_number={saved_account_number} />
             </div>
+            <UpdateBalanceForm windowOpen={this.state.windowOpenString} windowToggle={this.depositButton} account_number={this.state.saved_account_number} />
+            <WithdrawalBalanceForm windowOpen={this.state.withdrawWindowOpenString} windowToggle={this.withdrawButton} account_number={this.state.saved_account_number} />
         </div>)
 
         return (
@@ -194,9 +197,9 @@ class TellerView extends Component {
 }
 
 const mapStateToProps = (state) => {
-    let { first_name, last_name, email, isadmin, street, city, zip, phone_number, account_number } = state
-    state = state.state
-    return { first_name, last_name, email, isadmin, street, city, zip, phone_number, state, account_number }
+    let { first_name, last_name, email, isadmin, street, city, zip, phone_number, account_number, _state } = state
+    
+    return { first_name, last_name, email, isadmin, street, city, zip, phone_number, _state, account_number }
 }
 
 const mapDispatchToProps = {

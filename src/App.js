@@ -9,7 +9,7 @@ import router from "./components/Routes"
 
 function App() {
   return (
-    <Provider store={store}>
+    <Provider store={store}> 
       <Router>
         <div className="App">
           <Header />

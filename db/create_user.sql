@@ -16,14 +16,14 @@ insert into user_personal_info(
     city,
     zip,
     isAdmin,
-    state,
+    _state,
     user_info_id
 )values(
     ${street},
     ${city},
     ${zip},
     false,
-    ${state},
+    ${_state},
     (select id from user_info where username = ${username})
 );
 insert into secret_info(

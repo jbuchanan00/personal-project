@@ -148,29 +148,52 @@
 @media (min-width: 750px){
     .teller-account-view-specific-desktop{
         display: block;
-
+        
     }
     .teller-customer-info{
         justify-content: space-around;
+        font-size: 1.5em;
     }
-    .account-view-teller{
-        
-    }
+    
     .deposit-verification{
-        margin: -375px 8vw;
-        backdrop-filter: blur(10px);
-        backdrop-filter: grayscale(30%);
-        -webkit-backdrop-filter: blur(10px);
+        margin: -600px 8vw;
         position: fixed;
         height: 400px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        box-shadow: 5px 5px 5px grey;
         .type-of-account-dw{
             display: block;
             font-size: 3em;
             text-transform: capitalize;
+            color: #f1f1f1;
+            font-family: $title-font;
+            font-weight: 700;
         }
 
+    }
+    .blurred-background-teller{
+        filter: blur(10px);
+        background: black;
+        position: fixed;
+        height: 150vh;
+        width: 105vw;
+        
+        opacity: .6;
+    }
+    .welcome-teller-name{
+        font-size: 2em;
+    }
+    .specific-view-teller{
+        font-size: 1.5em;
+        margin: 10px;
+    }
+    .account-view-teller{
+        border-bottom: 1px dotted #000;
+        margin: 0px, 20px;
+    }
+    .teller-account-container{
+        height: 350px;
     }
 }

@@ -66,9 +66,9 @@ module.exports = {
         const db = req.app.get("db")
 
         const {account_number, username} = req.session.user
-        const {phone_number, email, city, state, street, zip} = req.body
+        const {phone_number, email, city, _state, street, zip} = req.body
 
-        await db.update_user_info({account_number, username, phone_number, email, city, state, street, zip})
+        await db.update_user_info({account_number, username, phone_number, email, city, _state, street, zip})
 
         let user = await db.get_user_by_username({username, email})
         user = user[0]
@@ -84,9 +84,9 @@ module.exports = {
     updateUserInfoAdmin: async (req, res) => {
         const db = req.app.get("db")
 
-        const {username, first_name, last_name, phone_number, email, city, state, street, zip, isadmin} = req.body
+        const {username, first_name, last_name, phone_number, email, city, _state, street, zip, isadmin} = req.body
 
-        let user = await db.update_user_info_admin({username, first_name, last_name, phone_number, email, city, state, street, zip, isadmin})
+        let user = await db.update_user_info_admin({username, first_name, last_name, phone_number, email, city, _state, street, zip, isadmin})
         user = user[0]
 
         res.status(200).send(user)

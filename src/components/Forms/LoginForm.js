@@ -21,7 +21,6 @@ class LoginForm extends Component {
     loginClick = async () => {
         const { usernameEmail, password } = this.state
         const res = await axios.post("/auth/login", { usernameEmail, password })
-        console.log(res.data)
         this.props.updateUserInfo(res.data)
         this.setState({
             usernameEmail: "",
@@ -56,8 +55,6 @@ class LoginForm extends Component {
     }
 }
 
-const mapDispatchToProps = {
-    updateUserInfo
-}
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+
+export default connect(null, {updateUserInfo})(LoginForm)

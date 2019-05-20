@@ -9,13 +9,13 @@ module.exports = {
         //email, password, birthday, ssn, phone number, street, city, state, zip
         const db = req.app.get("db")
         const {first_name, last_name, email, password, birthday, ssn, phone_number, street, city,
-        state, zip, username} = req.body
+        _state, zip, username} = req.body
         
         const existingAccounts = await db.creating_account_number()
         
         const account_number = `10${existingAccounts[0].count}`
 
-        const existingUser = await db.get_user_by_email({email})
+        const existingUser = await db.get_user_by_username({username})
         if(existingUser[0]){
             return res.status(409).send(`Email already in use`)
         }
@@ -24,7 +24,7 @@ module.exports = {
         const hash = bcrypt.hashSync(password, salt)
 
         let response = await db.create_user({username, first_name, last_name, email, hash, birthday, ssn, phone_number, street, city,
-        state, zip, account_number})
+        _state, zip, account_number})
 
         const newUser = response[0]
         
@@ -128,7 +128,6 @@ module.exports = {
             let user = await db.get_user_by_username({username: "joshb", password: "password"})
             user = user[0]
             
-            console.log(user)
             if(!user){
                 return res.status(409).send(`Missing email/username or password`)
             }

@@ -9,6 +9,11 @@ const userCtrl = require("./controllers/userController")
 
 
 const app = express()
+const path = require('path'); // Usually moved to the start of file
+
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 massive(CONNECTION_STRING).then(dbInstance => {
     app.set("db", dbInstance)

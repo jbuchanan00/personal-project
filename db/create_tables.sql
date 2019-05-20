@@ -9,7 +9,7 @@ create table user_personal_info(
     id serial primary key,
     street varchar,
     city varchar,
-    state varchar(2),
+    _state varchar(2),
     zip varchar(10),
     isAdmin boolean
     user_info_id integer,

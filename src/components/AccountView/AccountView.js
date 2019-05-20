@@ -36,6 +36,7 @@ class AccountView extends Component {
 
     sessionInfo = async () => {
         let session = await axios.get("/usersession")
+        console.log(session.data)
         this.props.updateUserInfo(session.data)
     }
 
@@ -133,14 +134,12 @@ class AccountView extends Component {
 }
 
 const mapStatetoProps = (state) => {
-    const { first_name, lastName, accountNumber, isadmin } = state
+    const { first_name, lastName, accountNumber, isadmin } = state.userInfoReducer
     return { first_name, lastName, accountNumber, isadmin }
 }
 
-const mapDispatchToProps = {
-    updateUserInfo
-}
 
 
-export default connect(mapStatetoProps, mapDispatchToProps)(withRouter(AccountView))
+
+export default connect(mapStatetoProps, {updateUserInfo})(withRouter(AccountView))
 

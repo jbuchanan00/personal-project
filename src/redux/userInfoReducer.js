@@ -7,7 +7,7 @@ let initialState = {
     username: "",
     street: "",
     zip: "",
-    state: "",
+    _state: "",
     isadmin: false
 
 }
@@ -26,7 +26,7 @@ export function updateUserInfo(obj){
 export default function reducer(state = initialState, action){
     switch(action.type){
         case UPDATE_USER_INFORMATION:
-            let {first_name, last_name, email, account_number, phone_number, username, street, zip, state, isadmin, city} = action.payload
+            let {first_name, last_name, email, account_number, phone_number, username, street, zip, _state, isadmin, city} = action.payload
             return {
                 ...state,
                 first_name,
@@ -35,14 +35,14 @@ export default function reducer(state = initialState, action){
                 account_number,
                 phone_number,
                 username,
-                state,
+                _state,
                 street,
                 zip,
                 isadmin,
                 city
             }
         default:
-            return initialState
+            return state
     }
 }
 

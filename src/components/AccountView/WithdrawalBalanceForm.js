@@ -30,7 +30,7 @@ class UpdateBalanceForm extends Component {
         let { account_number } = this.props
         let { amount, account_type } = this.state
         await axios.put("/update/withdrawal", { account_number, account_type, amount })
-        this.props.windowToggle()
+        window.location.reload()
 
     }
 
