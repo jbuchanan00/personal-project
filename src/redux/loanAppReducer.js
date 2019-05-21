@@ -46,16 +46,19 @@ function loanReducer(state = initialState, action){
     switch(action.type){
         case UPDATE_USER_INFO_LOAN:
             let {first_name, last_name, email, account_number, phone_number, street, zip, _state, city, ssn} = action.payload
+            
             return{
                 ...state, first_name, last_name, email, account_number, phone_number, _state, zip, city, street, ssn
             }
         case UPDATE_USER_EMPLOYMENT:
             let {employer, work_title, income} = action.payload
+            
             return{
                 ...state, employer, work_title, income
             }
         case UPDATE_USER_REQUEST:
             let {type_of_loan, amount, term_length} = action.payload
+            
             return{
                 ...state, type_of_loan, amount, term_length
             }

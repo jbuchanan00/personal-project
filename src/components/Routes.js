@@ -11,6 +11,7 @@ import UpdateUserInfoAdmin from "./Forms/UpdateUserInfoAdmin";
 import AFLPersonalInfo from "./applyingforloan/AFLPersonalInfo"
 import AFLRequest from "./applyingforloan/AFLRequest"
 import AFLEmploymentInfo from "./applyingforloan/AFLEmploymentInfo"
+import ApplyForLoan from "./applyingforloan/ApplyForLoan"
 
 
 
@@ -28,5 +29,6 @@ export default(
         <Route path="/teller/updateaccount" component={UpdateUserInfoAdmin} />
         <Route path="/apply/2" component={AFLEmploymentInfo} />
         <Route path="/apply/3" component={AFLRequest} />
+        <Route path="/apply/submitted" component={ApplyForLoan} />
     </Switch>
 )

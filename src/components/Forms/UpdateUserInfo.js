@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux";
 import axios from "axios"
 import { updateUserInfo } from "../../redux/userInfoReducer"
+import swal from "sweetalert"
 
 
 class UpdateUserInfo extends Component {
@@ -37,15 +38,18 @@ class UpdateUserInfo extends Component {
             [name]: value
         })
     }
+    
     handleSubmit = async () => {
         let { account_number } = this.props
         let { phone_number, _state, street, city, zip, email } = this.state
         await axios.put("/account/update", { account_number, phone_number, _state, street, city, zip, email })
-        window.location.reload()
+        swal("Success!", "Changes have been saved.", "success")
     }
+
     handleCancel = () => {
         this.props.history.push("/info/account")
     }
+
     render() {
         let loggedIn = (this.props.account_number) ? <div>
             <div className="name-container"><h3 className="name-text">{this.props.first_name} {this.props.last_name}</h3></div>

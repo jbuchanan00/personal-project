@@ -36,18 +36,11 @@ class AccountView extends Component {
 
     sessionInfo = async () => {
         let session = await axios.get("/usersession")
-        console.log(session.data)
         this.props.updateUserInfo(session.data)
     }
 
     render() {
-
-
-
-
-
         let autoLoanView = (this.state.autoLoan !== 0) ?
-
             <div className="account-balance-container">
                 <div className="inside-container-balance">
                     <div className="type-of-account">
@@ -61,7 +54,6 @@ class AccountView extends Component {
             </div> : null
 
         let personalLoanView = (this.state.personalLoan !== 0) ?
-
             <div className="account-balance-container">
                 <div className="inside-container-balance">
                     <div className="type-of-account">
@@ -74,10 +66,7 @@ class AccountView extends Component {
                 <button className="history-button">History</button>
             </div> : null
 
-
-
         let loggedIn = (this.props.first_name) ?
-
             <div className="account-view-total">
                 <div className="welcome-name">
                     Welcome {this.props.first_name}!
@@ -119,15 +108,11 @@ class AccountView extends Component {
                         <button className="history-button">History</button>
                     </div>
                 </div>
-            </div> : <p>You have not been logged in</p>
-        let desktopAccountView;
-
-
+            </div> : <h1>You have not been logged in</h1>
 
         return (
             <div>
-                {loggedIn}
-                
+                {loggedIn}             
             </div>
         )
     }
@@ -137,9 +122,6 @@ const mapStatetoProps = (state) => {
     const { first_name, lastName, accountNumber, isadmin } = state.userInfoReducer
     return { first_name, lastName, accountNumber, isadmin }
 }
-
-
-
 
 export default connect(mapStatetoProps, {updateUserInfo})(withRouter(AccountView))
 

@@ -5,6 +5,7 @@ import DeleteUser from "../DeleteUser"
 import UpdateBalanceForm from "./UpdateBalanceForm";
 import { updateUserInfo } from "../../redux/userInfoReducer"
 import WithdrawalBalanceForm from "./WithdrawalBalanceForm"
+import swal from "sweetalert"
 
 //use info from redux.  additional info get through axios calls including ssn, bday.
 
@@ -30,15 +31,15 @@ class TellerView extends Component {
         }
     }
 
-    // async componentDidMount() {
-    //     try {
-    //         let session = await axios.get("/usersession")
-    //         this.props.updateUserInfo(session.data)
-    //     }
-    //     catch (err) {
-    //         console.log(err)
-    //     }
-    // }
+    async componentDidMount() {
+        try {
+            let session = await axios.get("/usersession")
+            this.props.updateUserInfo(session.data)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
 
     accountNumberChange = (e) => {
         let { name, value } = e.target
@@ -46,10 +47,11 @@ class TellerView extends Component {
             [name]: value
         })
     }
+
     sumbitAccountNumber = () => {
         let { account_number } = this.state
         if (this.props.account_number === account_number) {
-            alert("You cannot adjust your account.")
+            swal("Warning", "You cannot adjust your account", "warning")
             return
         }
         axios.post("/account/teller", { account_number }).then(res => {
@@ -61,8 +63,7 @@ class TellerView extends Component {
                     this.setState({
                         ableToFindAccount: false
                     }))
-            }
-
+                }
             let { ssn, birthday, savings_balance, checkings_balance, auto_loan_balance, personal_loan_balance,
                 credit_card_balance, email } = res.data[0]
             this.setState({
@@ -82,8 +83,8 @@ class TellerView extends Component {
 
             })
         })
-
     }
+
     depositButton = () => {
         this.setState({
             windowOpen: !this.state.windowOpen
@@ -97,8 +98,8 @@ class TellerView extends Component {
                 windowOpenString: "true"
             })
         }
-
     }
+
     withdrawButton = () => {
         this.setState({
             withdrawOpen: !this.state.withdrawOpen
@@ -113,24 +114,29 @@ class TellerView extends Component {
             })
         }
     }
+
     reloadPage = () => {
         window.location.reload()
     }
 
-
     render() {
-        console.log(this.state)
         let { saved_account_number } = this.state
 
         let blurredBackground = (!this.state.windowOpen && !this.state.withdrawOpen) ? null : <div className="blurred-background-teller"></div>
+
         let accountFalse = (this.state.ableToFindAccount) ? null : <h2>Unable to find account</h2>
+
+        let depositWindow = (this.state.windowOpen) ? <UpdateBalanceForm windowOpen={this.state.windowOpenString} windowToggle={this.depositButton} account_number={this.state.saved_account_number} /> : null
+
+        let withdrawWindow = (this.state.withdrawOpen) ?<WithdrawalBalanceForm windowOpen={this.state.withdrawWindowOpenString} windowToggle={this.withdrawButton} account_number={this.state.saved_account_number} /> : null
+
         let accountAlreadyFound = (this.state.ssn) ? <button onClick={this.reloadPage} className="find-account-button">Exit Account</button> : <div>
             <div className="input-button-teller-container">
                 {blurredBackground}
                 <input name="account_number" value={this.state.account_number} onChange={this.accountNumberChange} className="account-find-input"></input>
                 <button onClick={this.sumbitAccountNumber} className="find-account-button">Get Account</button>
             </div>
-            <h3 className="welcome-teller-name">TRANSACTION</h3>
+            
         </div>
         let adminStatus = (!this.props.isadmin) ?
             <h1>Unauthorized Access</h1>
@@ -140,26 +146,20 @@ class TellerView extends Component {
                 {accountAlreadyFound}
             </div>
 
-        let accountFound = this.state.ssn ? null : (<div>
+        let accountFound = !this.state.ssn ? null : (<div>
             <div className="teller-customer-info">
                 {blurredBackground}
                 <div className="teller-account-view-specific">Acct: {this.state.saved_account_number}</div>
 
                 <div className="teller-account-view-specific-desktop">SSN: {this.state.ssn}</div>
                 <div className="teller-account-view-specific-desktop">Birthday: {this.state.birthday}</div>
-
-
-
-
             </div>
             <div className="teller-account-container">
                 <div className="account-view-teller">
                     <div className="specific-view-teller">Savings: ${this.state.savings}</div>
-
                 </div>
                 <div className="account-view-teller">
                     <div className="specific-view-teller">Checkings: ${this.state.checkings}</div>
-
                 </div>
                 <div className="account-view-teller">
                     <div className="specific-view-teller">Auto Loan: ${this.state.auto_loan}</div>
@@ -167,27 +167,25 @@ class TellerView extends Component {
                 </div>
                 <div className="account-view-teller">
                     <div className="specific-view-teller">Personal Loan: ${this.state.personal_loan}</div>
-
                 </div>
                 <div className="account-view-teller">
                     <div className="specific-view-teller">Credit Card: ${this.state.credit_card}</div>
-
                 </div>
             </div>
             <button onClick={this.depositButton} className="teller-buttons">Deposit</button><button onClick={this.withdrawButton} className="withdraw-button ">Withdrawal</button>
-
-
-
             <div className="email-delete-container">
                 <div className="specific-view-teller">{this.state.email}</div>
                 <DeleteUser email={this.state.email} account_number={saved_account_number} />
             </div>
-            <UpdateBalanceForm windowOpen={this.state.windowOpenString} windowToggle={this.depositButton} account_number={this.state.saved_account_number} />
-            <WithdrawalBalanceForm windowOpen={this.state.withdrawWindowOpenString} windowToggle={this.withdrawButton} account_number={this.state.saved_account_number} />
+            {depositWindow}
+            {withdrawWindow}
         </div>)
 
         return (
             <div>
+                <div className="page-desc">
+                <p className="welcome-teller-name">TRANSACTION</p>
+                </div>
                 {adminStatus}
                 {accountFalse}
                 {accountFound}
@@ -197,8 +195,8 @@ class TellerView extends Component {
 }
 
 const mapStateToProps = (state) => {
-    let { first_name, last_name, email, isadmin, street, city, zip, phone_number, account_number, _state } = state
-    
+    let { first_name, last_name, email, isadmin, street, city, zip, phone_number, account_number, _state } = state.userInfoReducer
+
     return { first_name, last_name, email, isadmin, street, city, zip, phone_number, _state, account_number }
 }
 

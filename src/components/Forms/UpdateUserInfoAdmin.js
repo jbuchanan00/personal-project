@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux";
 import { updateUserInfo } from "../../redux/userInfoReducer"
 import axios from "axios"
+import swal from "sweetalert"
 
 class UpdateUserInfoAdmin extends Component {
     constructor(props) {
@@ -62,12 +63,11 @@ class UpdateUserInfoAdmin extends Component {
             })
         })
     }
-    handleSubmit = () => {
+    handleSubmit = async () => {
         const { first_name, last_name, isadmin, phone_number, _state, street, city, zip, email, username } = this.state
-        axios.put("/teller/updateinfoteller", { first_name, last_name, isadmin, phone_number, _state, street, city, zip, email, username }).then(res => {
-            console.log(res)
-            // window.location.reload()
-        })
+        await axios.put("/teller/updateinfoteller", { first_name, last_name, isadmin, phone_number, _state, street, city, zip, email, username }).then(res => {
+            swal("Success!", "Changes have been saved.", "success")
+        }).catch(swal("Error", "Changes were not saved.", "error"))
     }
     handleCancel = () => {
         this.setState({
@@ -106,7 +106,6 @@ class UpdateUserInfoAdmin extends Component {
 
                 <button className="find-account-button-info" onClick={this.getUserInfo}>Get Account</button>
             </div>
-            <h3 className="welcome-teller-name">INFO</h3>
         </div>
 
         let adminUse = (this.props.isadmin) ?
@@ -169,6 +168,9 @@ class UpdateUserInfoAdmin extends Component {
 
         return (
             <div>
+                <div className="page-desc">
+                    <p className="welcome-teller-name">INFO</p>
+                </div>
                 {adminUse}
                 {accountFound}
             </div>
@@ -181,7 +183,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => {
-    let { first_name, isadmin, last_name } = state
+    let { first_name, isadmin, last_name } = state.userInfoReducer
     return { first_name, isadmin, last_name }
 }
 

@@ -22,4 +22,5 @@ insert into loan_request(
     ${loan_amount},
     ${term_length},
     ${loan_type}
-)
+);
+select * from loan_request

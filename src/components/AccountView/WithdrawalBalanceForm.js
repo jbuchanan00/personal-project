@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import axios from "axios";
 import Select from "react-select"
 import { connect } from "react-redux"
+import swal from "sweetalert"
 
 class UpdateBalanceForm extends Component {
     constructor() {
@@ -30,8 +31,8 @@ class UpdateBalanceForm extends Component {
         let { account_number } = this.props
         let { amount, account_type } = this.state
         await axios.put("/update/withdrawal", { account_number, account_type, amount })
-        window.location.reload()
-
+        swal("Success!", "Transaction was completed successfully", "success")
+        this.props.windowToggle()
     }
 
 

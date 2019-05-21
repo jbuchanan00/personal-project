@@ -5,6 +5,7 @@
 @import "./styles/Home";
 @import "./styles/UpdateInfo";
 @import "./styles/TellerView";
+@import "./styles/LoanApp";
 
 .App {
   text-align: center;
@@ -41,7 +42,7 @@ header{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 15vh;
+  height: 100px;
   background-color: #4d7e29;
   
 }

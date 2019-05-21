@@ -54,7 +54,7 @@ class Header extends Component {
                             <p onClick={this.toggle} >Update Info</p>
                         </Link>
                         <Link className="menu-link" to="/apply/1">
-                        <p className="menu-link">Apply For a Loan</p>
+                        <p onClick={this.toggle}>Apply For a Loan</p>
                         </Link>
                     </div>
                     :
